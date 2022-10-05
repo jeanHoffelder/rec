@@ -6,5 +6,10 @@
             "email": "104578531+jeanHoffelder@users.noreply.github.com"
         }
     ],
-    "require": {}
+    "require": {},    
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        }
+    }
 }
