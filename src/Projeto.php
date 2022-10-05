@@ -9,9 +9,7 @@ class Projeto implements ActiveRecord
         private string $descricao,
         private string $data,
         private int $status
-    ) {
-    }
-
+    ){}
     public function setId(int $id): void
     {
         $this->id = $id;
@@ -42,12 +40,12 @@ class Projeto implements ActiveRecord
         return $this->data;
     }
     
-    public function setStatus(string $status): void
+    public function setStatus(int $status): void
     {
         $this->status = $status;
     }
 
-    public function getStatus(): string
+    public function getStatus(): int
     {
         return $this->status;
     }
@@ -92,18 +90,18 @@ class Projeto implements ActiveRecord
     public static function realizadas(): array
     {
         $conexao = new MySQL();
-        $sql = "SELECT Festa.data, Festa.Descricao, Festa.status,Festas.endereco
-        FROM Festa
-        WHERE Festa.data < CURRENT_DATE
-        ORDER BY Festa.data ASC    
+        $sql = "SELECT atividades.id, atividades.descricao, atividades.data,atividades.status
+        FROM atividades
+        WHERE atividades.data < CURRENT_DATE
+        ORDER BY atividades.data ASC    
         ";
         $resultados = $conexao->consulta($sql);
         $sRealizadas = array();
         foreach ($resultados as $resultado) {
-            $p = new Projeto($resultado['Descricao'], $resultado['data'], $resultado['status'], $resultado['data']);
-            $sRealizadas[] = $p;
+            $p = new Projeto($resultado['Descricao'], $resultado['data'], $resultado['status']);
+            $Realizadas[] = $p;
         }
-        return $sRealizadas;
+        return $Realizadas;
     }
 
     public static function proximas(): array

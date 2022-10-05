@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__."/vendor/autoload.php";
-    $atividades = Projeto::findall();
+$atividades = Projeto::findall();
     ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -12,25 +12,32 @@ require_once __DIR__."/vendor/autoload.php";
     </head>
     <body>
     
-    <table>
-        <tr>
-            <td>id</td>
-            <td>descricao</td>
-            <td>data</td>
-            <td>status</td>
+        <table>
+            <tr>
+                <td>id</td>
+                <td>descricao</td>
+                <td>data</td>
+                <td>status</td>
 
-        </tr>
-        <?php
-        foreach($atividades as $atividade){
-            echo "<tr>";
-            echo "<td>{$atividade->getId()}</td>";
-            echo "<td>{$atividade->getDescricao()}</td>";
-            //Formatação da data para exibir como dia, mês e ano.
-            $dataFormatada = new DateTime($atividade->getData());
-            echo "<td>{$dataFormatada->format('d/m/Y')}</td>";
-            echo "<td>{$atividade->getStatus()}</td>";
-        }
-        ?>
+            </tr>
+            <?php
+            foreach($atividades as $atividade){
+                echo "<tr>";
+                echo "<td>{$atividade->getId()}</td>";
+                echo "<td>{$atividade->getDescricao()}</td>";
+                //Formatação da data para exibir como dia, mês e ano.
+                $dataFormatada = new DateTime($atividade->getData());
+                echo "<td>{$dataFormatada->format('d/m/Y')}</td>";
+                echo "<td>{$atividade->getStatus()}</td>";
+                echo "<td>
+                <a href='formEdit.php?id={$atividade->getId()}'>Editar atividade</a>
+                <a href='excluir.php?id={$atividade->getId()}'>Excluir atividade</a> 
+             </td>";
+        echo "</tr>";
+            }
+            ?>
+        </table>
+        <a href="formCad.php">cadastrar</a>
     </body>
-    </html>
+</html>
         
